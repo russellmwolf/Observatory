@@ -7,11 +7,12 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0.1');
-  api.addFiles('nrswolf:observatory.js');
+  api.addFiles('nrswolf:observatory.js', 'client');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('nrswolf:observatory');
-  api.addFiles('nrswolf:observatory-tests.js');
+  api.use('nrswolf:observatory', 'client');
+  api.addFiles('nrswolf:observatory.js', 'client');
+  api.addFiles('nrswolf:observatory-tests.js', 'client');
 });

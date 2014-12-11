@@ -19,11 +19,9 @@ Observatory = {
 
     collection.forEach(function(item, _index) {
       for (var key in item) {
-        if (headers.indexOf(key) === 1) {
-          break;
+        if (headers.indexOf(key) === -1) {
+          headers.push(key);
         }
-
-        headers.push(key);
       }
     });
 
@@ -36,6 +34,8 @@ Observatory = {
     headers.forEach(function(field, _index) {
       if (!!item[field]) {
         itemData.push(item[field]);
+      } else {
+        itemData.push(null);
       }
     });
 
@@ -43,6 +43,8 @@ Observatory = {
   },
 
   buildCSV: function(collection) {
+    var name = collection.collection.name.toUpperCase();
+
     var outputData = this.buildOutput(collection);
     var csvContent = "data:text/csv;charset=utf-8,";
 
@@ -55,7 +57,7 @@ Observatory = {
 
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "Winview_Users.csv");
+    link.setAttribute("download", name + ".csv");
 
     link.click();
   }
