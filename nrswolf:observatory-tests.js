@@ -9,19 +9,22 @@ Tinytest.add('Observatory', function(test) {
   var charizardId = Pokemon.insert({
     name: 'Charizard',
     type: 'Fire',
-    specialMove: 'Fireball'
+    moves: [
+      'Fireball',
+      'Firebreath'
+    ]
   });
 
   var actualHeaders = Observatory.buildHeaders(Pokemon.find());
-  var expectedHeaders = ['name', 'type', '_id', 'specialMove'];
+  var expectedHeaders = ['name', 'type', '_id', 'moves.0', 'moves.1'];
 
   test.equal(actualHeaders, expectedHeaders);
 
   var actualOutput = Observatory.buildOutput(Pokemon.find());
   var expectedOutput = [
     actualHeaders,
-    ['Pikachu', 'Electriciy', pikachuId, null],
-    ['Charizard', 'Fire', charizardId, 'Fireball']
+    ['Pikachu', 'Electriciy', pikachuId, null, null],
+    ['Charizard', 'Fire', charizardId, 'Fireball', 'Firebreath']
   ];
 
   test.equal(actualOutput, expectedOutput);
